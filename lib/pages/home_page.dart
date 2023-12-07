@@ -8,66 +8,61 @@ class HomePage extends StatefulWidget {
     return _HomePageState();
   }
 }
-
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  double _buttonRadius = 100;
-
-  final Tween<double> _backgroundScale = Tween<double>(begin: 0.0, end: 1.0);
-
-  AnimationController? _starIconAnimationController;
-
+  class _HomePageState extends State<HomePage>
+  with SingleTickerProviderStateMixin  {
+  double _buttonRadius=100;
+  final Tween<double>_backgroundScale=Tween<double>(begin: 0.0,end:1.0);
+  AnimationController?_starAnimationController;
   @override
-  void initState() {
-    super.initState();
-    _starIconAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(
-        seconds: 4,
-      ),
-    );
-    _starIconAnimationController!.repeat();
+  void initState(){
+  super.initState();
+  _starAnimationController=AnimationController(
+  vsync: this,
+  duration: const Duration(
+  seconds: 4,
+  ),
+  );
+  _starAnimationController!.repeat();
   }
-
-  @override
-  Widget build(BuildContext context) {
+@override
+    Widget build(BuildContext context){
     return Scaffold(
-      body: Container(
-        child: Stack(
+      body:Container(
+        child:Stack(
           clipBehavior: Clip.none,
           children: [
             _pageBackground(),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _circularAnimationButton(),
                 _starIcon(),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
-  }
+}
 
-  Widget _pageBackground() {
+Widget _pageBackground(){
     return TweenAnimationBuilder(
-      tween: _backgroundScale,
-      curve: Curves.easeInOutCubicEmphasized,
-      duration: Duration(seconds: 1),
-      builder: (_context, double _scale, _child) {
+      tween:_backgroundScale,
+      curve:Curves.easeInOutCubicEmphasized,
+      duration: Duration(seconds: 5),
+      builder: ( _context , double _scale , _child){
         return Transform.scale(
-          scale: _scale,
-          child: _child,
+        scale: _scale,
+        child: _child,
         );
-      },
-      child: Container(
+    },
+      child:Container(
         color: Colors.blue,
       ),
     );
-  }
+}
 
   Widget _circularAnimationButton() {
     return Center(
@@ -98,20 +93,16 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-
   Widget _starIcon() {
-    return AnimatedBuilder(
-      animation: _starIconAnimationController!.view,
-      builder: (_buildContext, _child) {
-        return Transform.rotate(
-          angle: _starIconAnimationController!.value * 2 * pi,
-          child: _child,
-        );
-      },
-      child: const Icon(
-        Icons.star,
-        size: 100,
-        color: Colors.white,
+  return AnimatedBuilder(animation: _starAnimationController!.view,
+    builder: (_buildContext, _child) {
+      return Transform.rotate(angle: _starAnimationController!.value * 2 * pi,
+        child: _child,
+      );
+    },
+
+    child: const Icon(Icons.star, size: 200,
+        color: Colors.white
       ),
     );
   }

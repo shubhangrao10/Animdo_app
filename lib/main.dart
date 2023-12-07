@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'pages/home_page.dart';
+import './pages/home_page.dart';
 
-void main() {
+void main(){
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget{
+
+  const MyApp({Key? key}):super(key:key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
-      title: 'Animdo',
-      theme: ThemeData(
+      title:" ANIMDO APP ",
+      theme:ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home:HomePage(),
     );
   }
 }
